@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.app20.R;
 
 import java.util.List;
@@ -41,8 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
-        //return classList.size();
+        return classList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
