@@ -32,9 +32,6 @@ public class ClassesFragment extends Fragment {
     private FloatingActionButton fab;
     private FragmentClassesBinding binding;
     private static ClassesFragment instance;
-
-    private boolean flag = false;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -61,19 +58,6 @@ public class ClassesFragment extends Fragment {
                 Intent intent = new Intent(requireActivity(), ClassAddEdit.class);
                 startActivity(intent);
 
-
-                Intent classRecieved = getActivity().getIntent();
-                int id = classRecieved.getIntExtra("id",0);
-                String courseNum = classRecieved.getStringExtra("courseNum");
-                String prof = classRecieved.getStringExtra("prof");
-                String time = classRecieved.getStringExtra("time");
-                flag = classRecieved.getBooleanExtra("flag", true);
-
-                if (flag){
-                    ClassModel addtheclass = new ClassModel(id, courseNum,prof,time);
-                    addClass(addtheclass);
-
-                }
             }
         });
 
@@ -88,10 +72,6 @@ public class ClassesFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    public void updateRecyclerView(){
-        mAdapter = new RecyclerViewAdapter(classList, requireContext());
     }
 
     public static List<ClassModel> getClassList() {

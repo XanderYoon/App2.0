@@ -45,11 +45,6 @@ public class ClassAddEdit extends AppCompatActivity {
 
                 //go back to ClassesFragment
                 Intent intent = new Intent(ClassAddEdit.this, MainActivity.class);
-//                intent.putExtra("id",newClass.getId());
-//                intent.putExtra("courseNum", newClass.getCourseNum());
-//                intent.putExtra("prof",newClass.getProf());
-//                intent.putExtra("time", newClass.getTime());
-//                intent.putExtra("flag",true);
                 startActivity(intent);
             }
         });
