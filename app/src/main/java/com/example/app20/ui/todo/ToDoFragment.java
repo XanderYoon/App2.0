@@ -16,7 +16,7 @@ import com.example.app20.R;
 
 public class ToDoFragment extends Fragment {
 
-    private ToDoViewModel mViewModel;
+//    private ToDoViewModel mViewModel;
 
     public static ToDoFragment newInstance() {
         return new ToDoFragment();
@@ -31,7 +31,7 @@ public class ToDoFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ToDoViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(ToDoViewModel.class);
         // TODO: Use the ViewModel
     }
 

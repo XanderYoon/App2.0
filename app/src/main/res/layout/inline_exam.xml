@@ -1,0 +1,80 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <CheckBox
+            android:id="@+id/examCheckBox"
+            android:layout_width="60dp"
+            android:layout_height="58dp"
+            android:buttonTint="@android:color/holo_orange_light"
+            android:paddingStart="8dp" />
+
+        <TextView
+            android:id="@+id/examName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="-31dp"
+            android:layout_toStartOf="@+id/inlineExamEditButton"
+            android:layout_toEndOf="@+id/examCheckBox"
+            android:text="Line 1"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/examCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/examName"
+            android:layout_marginStart="30dp"
+            android:layout_toStartOf="@+id/inlineExamEditButton"
+            android:layout_toEndOf="@+id/examCheckBox"
+            android:text="Line 2"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/examDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/examCourse"
+            android:layout_alignStart="@+id/examCourse"
+            android:layout_toStartOf="@+id/inlineExamEditButton"
+            android:text="Line 3"
+            android:textColor="@android:color/black" />
+
+        <ImageButton
+            android:id="@+id/inlineExamEditButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/examCourse"
+            android:layout_toStartOf="@+id/inlineExamDeleteButton"
+            android:background="?android:attr/selectableItemBackground"
+            android:scaleType="fitCenter"
+            android:src="@drawable/inline_edit_button" />
+
+        <ImageButton
+            android:id="@+id/inlineExamDeleteButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/examCourse"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="23dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:scaleType="fitCenter"
+            android:src="@drawable/inline_delete_button" />
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

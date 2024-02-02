@@ -16,7 +16,7 @@ import com.example.app20.R;
 
 public class AssignmentFragment extends Fragment {
 
-    private AssignmentViewModel mViewModel;
+//    private AssignmentViewModel mViewModel;
 
     public static AssignmentFragment newInstance() {
         return new AssignmentFragment();
@@ -31,7 +31,7 @@ public class AssignmentFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AssignmentViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(AssignmentViewModel.class);
         // TODO: Use the ViewModel
     }
 

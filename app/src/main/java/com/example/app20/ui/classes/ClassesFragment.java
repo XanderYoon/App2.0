@@ -20,18 +20,20 @@ import com.example.app20.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClassesFragment extends Fragment {
     private static List<ClassModel> classList = new ArrayList<>();
-    private static int nextId = 5;
+    private static int nextId = 0;
+    private static int updateId;
     private RecyclerView recyclerView;
     public RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton fab;
     private FragmentClassesBinding binding;
     private static ClassesFragment instance;
+    private static boolean toUpdate;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -60,9 +62,12 @@ public class ClassesFragment extends Fragment {
 
             }
         });
-
-
-        mAdapter.notifyItemInserted(classList.size() - 1);
+        if (toUpdate) {
+            Log.d("Classes Fragment Class Size", String.valueOf(classList.size()));
+            mAdapter.notifyItemChanged(updateId);
+        } else {
+            mAdapter.notifyItemInserted(classList.size() - 1);
+        }
 
         return root;
     }
@@ -74,11 +79,26 @@ public class ClassesFragment extends Fragment {
         binding = null;
     }
 
+    public boolean isToUpdate() {
+        return toUpdate;
+    }
+
+    public static void setToUpdate(boolean toUpdate) {
+        ClassesFragment.toUpdate = toUpdate;
+    }
+
     public static List<ClassModel> getClassList() {
         return classList;
     }
     public static void addClass(ClassModel newClass) {
         classList.add(newClass);
+        toUpdate = false;
+
+    }
+    public static void setClassAtIndex(int id, ClassModel updateClass) {
+        classList.set(id, updateClass);
+        toUpdate = true;
+        updateId = id;
     }
 
     public static int getNextId() {
