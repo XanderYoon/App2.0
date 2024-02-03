@@ -12,6 +12,16 @@
     <string name="new_prof_entry">Professor</string>
     <string name="new_time_entry">Time</string>
 
+    <string name="exam_save_button">Save</string>
+    <string name="exam_title_button">Exam Title</string>
+    <string name="exam_course_button">Course</string>
+    <string name="exam_due_date">Due Date</string>
+
+    <string name="assignment_save_button">Save</string>
+    <string name="assignment_title_button">Assignment Title</string>
+    <string name="assignment_course_button">Course</string>
+    <string name="assignment_due_date">Due Date</string>
+
     <string name="menu_classes">Classes</string>
     <string name="menu_exams">Exams</string>
     <string name="menu_assignments">Assignments</string>

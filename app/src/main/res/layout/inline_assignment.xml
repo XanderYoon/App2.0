@@ -1,11 +1,11 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/inLineAssignmentLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="4dp"
+    android:outlineProvider="bounds"
     app:cardCornerRadius="8dp"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp">
+    app:cardElevation="10dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -23,21 +23,22 @@
             android:id="@+id/assignmentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="31dp"
-            android:layout_marginEnd="-31dp"
-            android:layout_toStartOf="@+id/inlineAssignmentEditButton"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/assignmentCheckBox"
             android:text="Line 1"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/assignmentCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/assignmentName"
-            android:layout_marginStart="30dp"
-            android:layout_toStartOf="@+id/inlineAssignmentEditButton"
-            android:layout_toEndOf="@+id/assignmentCheckBox"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
+            android:layout_toStartOf="@+id/inlineAssignmentDeleteButton"
             android:text="Line 2"
             android:textColor="@android:color/black" />
 
@@ -47,25 +48,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/assignmentCourse"
             android:layout_alignStart="@+id/assignmentCourse"
-            android:layout_toStartOf="@+id/inlineAssignmentEditButton"
             android:text="Line 3"
             android:textColor="@android:color/black" />
-
-        <ImageButton
-            android:id="@+id/inlineAssignmentEditButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/assignmentCourse"
-            android:layout_toStartOf="@+id/inlineAssignmentDeleteButton"
-            android:background="?android:attr/selectableItemBackground"
-            android:scaleType="fitCenter"
-            android:src="@drawable/inline_edit_button" />
 
         <ImageButton
             android:id="@+id/inlineAssignmentDeleteButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBottom="@+id/assignmentCourse"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="9dp"
@@ -75,4 +64,4 @@
             android:src="@drawable/inline_delete_button" />
 
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

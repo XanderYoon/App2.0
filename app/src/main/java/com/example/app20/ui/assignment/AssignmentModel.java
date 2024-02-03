@@ -1,14 +1,15 @@
 package com.example.app20.ui.assignment;
 
 public class AssignmentModel {
-    private int id;
-    private String assignment, course, date;
+    private int id, month, day;
+    private String assignment, course;
 
-    public AssignmentModel(int id, String assignment, String course, String date) {
+    public AssignmentModel(int id, String assignment, String course, int month, int day) {
         this.id = id;
         this.assignment = assignment;
         this.course = course;
-        this.date = date;
+        this.month = month;
+        this.day = day;
     }
 
     public int getId() {
@@ -35,11 +36,19 @@ public class AssignmentModel {
         this.course = course;
     }
 
-    public String getDate() {
-        return date;
+    public int getMonth() {
+        return month;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }

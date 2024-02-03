@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/newExamText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="@string/exam_title_button"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/newExamSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newExamText"
+        android:textSize="16sp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:text="@string/exam_save_button"
+        android:textAllCaps="false"
+        android:textColor="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/newExamCourseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newExamText"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="18sp"
+        android:hint="@string/exam_course_button" />
+
+    <EditText
+        android:id="@+id/newExamDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newExamText"
+        android:layout_alignStart="@id/newExamCourseText"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="20dp"
+        android:layout_toStartOf="@+id/newExamSaveButton"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="18sp"
+        android:hint="@string/exam_title_button"/>
+
+</RelativeLayout>

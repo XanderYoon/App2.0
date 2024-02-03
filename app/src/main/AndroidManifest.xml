@@ -19,6 +19,18 @@
             android:name=".ui.classes.ClassesFragment"
             android:exported="false" />
         <activity
+            android:name=".ui.assignment.AssignmentAddEdit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.assignment.AssignmentFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.exam.ExamAddEdit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.exam.ExamFragment"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
