@@ -34,19 +34,16 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment implements Adap
 
     public static final String TAG = "ActionBottomDialog";
     Button saveAssignmentButton;
-    EditText et_assignment, et_course, et_date;
+    EditText et_assignment;
     List<AssignmentModel> assignmentList;
     AssignmentModel currAssignment = null;
     private boolean toUpdate = false;
     private int newMonth;
     private int newDay;
-    private String newName;
     private String newCourse;
     int id;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayDate;
-    private AssignmentModel newAssignment;
-
     private Spinner courseSelector;
 
     public static AssignmentAddEdit newInstance(){
@@ -89,13 +86,11 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment implements Adap
         if (args != null) {
             id = args.getInt("id", -1);
         }
-        Log.d("THE ID PASS THROUGH BUNDLE", String.valueOf(id));
         if (id >= 0) {
             for (AssignmentModel c : assignmentList){
                 if (c.getId() == id) {
                     currAssignment = c;
                     toUpdate = true;
-                    Log.d("AssignmentAddEdit", "found matching ids " + id);
                 }
             }
             et_assignment.setText(currAssignment.getAssignment());
@@ -158,7 +153,6 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment implements Adap
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.newAssignmentCourseButton) {
-            Log.d("UPDATED THE COURSE", parent.getItemAtPosition(position).toString());
             newCourse = parent.getItemAtPosition(position).toString();
         }
     }

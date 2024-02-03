@@ -1,50 +1,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/newExamText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/newExamLocation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
         android:background="@null"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:gravity="center"
         android:hint="@string/exam_title_button"
-        android:textSize="18sp"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#009600"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/newExamLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="center"
+        android:hint="@string/exam_location_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#009600"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/newExamSaveButton"
-        android:layout_width="wrap_content"
+        android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/newExamText"
-        android:textSize="16sp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
         android:background="@android:color/transparent"
         android:text="@string/exam_save_button"
         android:textAllCaps="false"
-        android:textColor="@android:color/darker_gray" />
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/newExamCourseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newExamText"
-        android:layout_marginTop="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="18sp"
-        android:hint="@string/exam_course_button" />
 
-    <EditText
-        android:id="@+id/newExamDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newExamText"
-        android:layout_alignStart="@id/newExamCourseText"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="20dp"
+    <TextView
+        android:id="@+id/newExamDateText"
+        android:layout_width="112dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/newExamText"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="28dp"
         android:layout_toStartOf="@+id/newExamSaveButton"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="18sp"
-        android:hint="@string/exam_title_button"/>
+        android:layout_toEndOf="@+id/newExamTimeText"
+        android:gravity="center"
+        android:hint="@string/exam_due_date"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/newExamTimeText"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/newExamText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:hint="@string/exam_time_button"
+        android:textSize="18sp" />
 
 </RelativeLayout>

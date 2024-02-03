@@ -1,13 +1,30 @@
 package com.example.app20.ui.classes;
 public class ClassModel {
-    private int id;
-    private String courseNum, prof, time;
+    private int id, hour, minute;
+    private String courseNum, prof;
 
-    public ClassModel(int id, String courseNum, String prof, String time) {
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public ClassModel(int id, int hour, int minute, String courseNum, String prof) {
         this.id = id;
+        this.hour = hour;
+        this.minute = minute;
         this.courseNum = courseNum;
         this.prof = prof;
-        this.time = time;
     }
 
     public int getId() {
@@ -29,11 +46,5 @@ public class ClassModel {
     }
     public void setProf(String prof) {
         this.prof = prof;
-    }
-    public String getTime() {
-        return time;
-    }
-    public void setTime(String time) {
-        this.time = time;
     }
 }

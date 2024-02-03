@@ -15,7 +15,7 @@
         android:padding="8dp">
 
         <CheckBox
-            android:id="@+id/examCheckBox"
+            android:id="@+id/todoCheckBox"
             android:layout_width="60dp"
             android:layout_height="58dp"
             android:buttonTint="@android:color/holo_blue_dark"
@@ -25,30 +25,16 @@
             android:id="@+id/todoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/inlineExamEditButton"
-            android:layout_alignBottom="@+id/inlineExamEditButton"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="145dp"
-            android:layout_toStartOf="@+id/inlineExamEditButton"
-            android:layout_toEndOf="@+id/examCheckBox"
-            android:text="Line 1"
-            android:textColor="@android:color/black" />
-
-        <ImageButton
-            android:id="@+id/inlineExamEditButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="0dp"
-            android:layout_toStartOf="@+id/inlineExamDeleteButton"
-            android:background="?android:attr/selectableItemBackground"
-            android:scaleType="fitCenter"
-            android:src="@drawable/inline_edit_button" />
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="145dp"
+            android:layout_toEndOf="@+id/todoCheckBox"
+            android:text="Line 1"
+            android:textColor="@android:color/holo_blue_dark" />
 
         <ImageButton
-            android:id="@+id/inlineExamDeleteButton"
+            android:id="@+id/inlineTodoDeleteButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"

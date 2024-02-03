@@ -15,7 +15,8 @@
 
     <string name="exam_save_button">Save</string>
     <string name="exam_title_button">Exam Title</string>
-    <string name="exam_course_button">Course</string>
+    <string name="exam_location_button">Location</string>
+    <string name="exam_time_button">Time</string>
     <string name="exam_due_date">Due Date</string>
 
     <string name="assignment_save_button">Save</string>

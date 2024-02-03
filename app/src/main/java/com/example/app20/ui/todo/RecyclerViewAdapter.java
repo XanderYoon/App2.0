@@ -1,9 +1,9 @@
-package com.example.app20.ui.classes;
+package com.example.app20.ui.todo;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,43 +11,52 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.app20.R;
-import com.example.app20.ui.assignment.AssignmentFragment;
+import com.example.app20.ui.todo.TodoAddEdit;
+import com.example.app20.ui.todo.TodoAddEdit;
+import com.example.app20.ui.todo.TodoFragment;
+import com.example.app20.ui.todo.TodoModel;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-    List<ClassModel> classList;
+public class RecyclerViewAdapter extends RecyclerView.Adapter<com.example.app20.ui.todo.RecyclerViewAdapter.MyViewHolder> {
+    List<TodoModel> toDoList;
     Context context;
+    private TodoFragment activity;
 
-    public RecyclerViewAdapter(List<ClassModel> classList, Context context) {
-        this.classList = classList;
+    public RecyclerViewAdapter(List<TodoModel> toDoList, Context context, TodoFragment activity) {
+        this.toDoList = toDoList;
         this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.inline_class,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.inline_todo,parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
+    public int getItemCount() {
+        return toDoList.size();
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tv_courseNum.setText(classList.get(position).getCourseNum());
-        holder.tv_prof.setText(classList.get(position).getProf());
-        holder.tv_time.setText(makeTime(classList.get(position).getHour(), classList.get(position).getMinute()));
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.tv_toDo.setText(toDoList.get(position).getTask());
+        holder.tv_toDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //edit item
-                Intent intent = new Intent(context, ClassAddEdit.class);
-                intent.putExtra("id", classList.get(position).getId());
-                context.startActivity(intent);
-            }
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", position);
+                TodoAddEdit fragment = new TodoAddEdit();
+                fragment.setArguments(bundle);
+                fragment.show(activity.requireActivity().getSupportFragmentManager(), TodoAddEdit.TAG);
+                notifyItemChanged(position);            }
         });
         holder.delButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +69,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private void showDeleteConfirmationDialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Delete Confirmation")
-                .setMessage("Are you sure you want to delete this assignment?")
+                .setMessage("Are you sure you want to delete this toDo?")
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // User confirmed deletion
-                        ClassesFragment.deleteClass(position);
+                        TodoFragment.deleteTodo(position);
                         notifyDataSetChanged();
                     }
                 })
@@ -80,29 +89,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .show();
     }
 
-    @Override
-    public int getItemCount() {
-        return classList.size();
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_courseNum;
-        TextView tv_prof;
-        TextView tv_time;
-        ConstraintLayout parentLayout;
+        TextView tv_toDo;
         ImageButton delButton;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_courseNum = itemView.findViewById(R.id.courseNumAns);
-            tv_prof = itemView.findViewById(R.id.profAns);
-            tv_time = itemView.findViewById(R.id.timeAns);
-            parentLayout = itemView.findViewById(R.id.inLineClassLayout);
-            delButton = itemView.findViewById(R.id.inlineClassDeleteButton);
+            tv_toDo = itemView.findViewById(R.id.todoTextView);
+            delButton = itemView.findViewById(R.id.inlineTodoDeleteButton);
         }
     }
-    public static String makeTime(int hour, int min)
-    {
-        return hour + ":" + min;
-    }
+
 }

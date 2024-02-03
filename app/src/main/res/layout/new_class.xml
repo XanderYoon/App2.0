@@ -34,18 +34,19 @@
         android:textSize="18sp"
         android:hint="@string/new_prof_entry" />
 
-    <EditText
+    <TextView
         android:id="@+id/newTimeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="83dp"
+        android:layout_height="44dp"
         android:layout_below="@id/newCourseNumText"
         android:layout_alignStart="@id/newProfessorText"
-        android:layout_marginStart="161dp"
+        android:layout_marginStart="129dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="79dp"
         android:layout_toStartOf="@+id/newClassSaveButton"
+        android:gravity="center"
+        android:hint="@string/new_time_entry"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="18sp"
-        android:hint="@string/new_time_entry"/>
+        android:textSize="18sp" />
 
 </RelativeLayout>

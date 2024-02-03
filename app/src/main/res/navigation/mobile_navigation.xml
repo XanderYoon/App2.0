@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_exam" />
     <fragment
         android:id="@+id/nav_todo"
-        android:name="com.example.app20.ui.todo.ToDoFragment"
+        android:name="com.example.app20.ui.todo.TodoFragment"
         android:label="fragment_to_do"
         tools:layout="@layout/fragment_to_do" />
     <fragment

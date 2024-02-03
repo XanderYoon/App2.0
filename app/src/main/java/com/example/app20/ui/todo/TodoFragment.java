@@ -1,7 +1,4 @@
-package com.example.app20.ui.exam;
-
-import android.content.DialogInterface;
-import android.content.Intent;
+package com.example.app20.ui.todo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,53 +9,45 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 
 import com.example.app20.MainActivity;
 import com.example.app20.R;
-import com.example.app20.databinding.FragmentExamBinding;
-import com.example.app20.ui.classes.ClassModel;
+import com.example.app20.databinding.FragmentToDoBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-public class ExamFragment extends Fragment {
-    private static List<ExamModel> examList = new ArrayList<>();
+public class TodoFragment extends Fragment {
+    private static List<TodoModel> todoList = new ArrayList<>();
     private static int nextId = 0;
     private static int updateId;
     private RecyclerView recyclerView;
     public RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton fab;
-    private FragmentExamBinding binding;
-    private static ExamFragment instance;
+    private FragmentToDoBinding binding;
+    private static TodoFragment instance;
     private static boolean toUpdate;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        binding = FragmentExamBinding.inflate(inflater, container, false);
+        binding = FragmentToDoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         super.onCreate(savedInstanceState);
         instance = this;
 
-        fab = root.findViewById(R.id.examFab);
+        fab = root.findViewById(R.id.todoFab);
 
-        recyclerView = root.findViewById(R.id.examRecyclerView);
+        recyclerView = root.findViewById(R.id.todoRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RecyclerViewAdapter(examList, requireContext(), this);
+        mAdapter = new RecyclerViewAdapter(todoList, requireContext(), this);
         recyclerView.setAdapter(mAdapter);
 
 
@@ -67,15 +56,15 @@ public class ExamFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", -1);
-                ExamAddEdit fragment = new ExamAddEdit();
+                TodoAddEdit fragment = new TodoAddEdit();
                 fragment.setArguments(bundle);
-                fragment.show(requireActivity().getSupportFragmentManager(), ExamAddEdit.TAG);
+                fragment.show(requireActivity().getSupportFragmentManager(), TodoAddEdit.TAG);
             }
         });
         if (toUpdate) {
             mAdapter.notifyItemChanged(updateId);
         } else {
-            mAdapter.notifyItemInserted(examList.size() - 1);
+            mAdapter.notifyItemInserted(todoList.size() - 1);
         }
         return root;
     }
@@ -92,29 +81,29 @@ public class ExamFragment extends Fragment {
     }
 
     public static void setToUpdate(boolean toUpdate) {
-        ExamFragment.toUpdate = toUpdate;
+        TodoFragment.toUpdate = toUpdate;
     }
 
-    public static List<ExamModel> getExamList() {
-        return examList;
+    public static List<TodoModel> getTodoList() {
+        return todoList;
     }
-    public static void addExam(ExamModel newExam) {
-        examList.add(newExam);
+    public static void addTodo(TodoModel newTodo) {
+        todoList.add(newTodo);
         toUpdate = false;
 
     }
-    public static void setExamAtIndex(int id, ExamModel updateExam) {
-        examList.set(id, updateExam);
+    public static void setTodoAtIndex(int id, TodoModel updateTodo) {
+        todoList.set(id, updateTodo);
         toUpdate = true;
         updateId = id;
     }
 
-    public static void deleteExam(ExamModel delExam) {
-        examList.remove(delExam);
+    public static void deleteTodo(TodoModel delTodo) {
+        todoList.remove(delTodo);
         --nextId;
     }
-    public static void deleteExam(int position) {
-        examList.remove(position);
+    public static void deleteTodo(int position) {
+        todoList.remove(position);
         --nextId;
     }
 
@@ -123,10 +112,10 @@ public class ExamFragment extends Fragment {
     }
 
     public static void setNextId(int nextId) {
-        ExamFragment.nextId = nextId;
+        TodoFragment.nextId = nextId;
     }
 
-    public static ExamFragment getInstance() {
+    public static TodoFragment getInstance() {
         return instance;
     }
 
