@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="60dp"
             android:layout_toStartOf="@+id/inlineExamDeleteButton"
             android:text="Line 2"
             android:textColor="@android:color/black" />

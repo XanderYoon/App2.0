@@ -170,7 +170,8 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment implements Adap
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
-        super.onDismiss(dialog);Bundle bundle = new Bundle();
+        super.onDismiss(dialog);
+        Bundle bundle = new Bundle();
         Intent intent = new Intent(requireActivity(), MainActivity.class);
         bundle.putString("redirectLoc", "assignment");
         intent.putExtras(bundle);

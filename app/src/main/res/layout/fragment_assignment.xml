@@ -31,4 +31,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ToggleButton
+        android:id="@+id/sortToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/sort_class"
+        android:textOn="@string/sort_due"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="26dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

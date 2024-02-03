@@ -1,6 +1,7 @@
 package com.example.app20.ui.assignment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,14 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
 
+import com.example.app20.MainActivity;
 import com.example.app20.R;
 import com.example.app20.databinding.FragmentAssignmentBinding;
+import com.example.app20.ui.classes.ClassModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class AssignmentFragment extends Fragment {
@@ -39,12 +49,11 @@ public class AssignmentFragment extends Fragment {
 
         binding = FragmentAssignmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         super.onCreate(savedInstanceState);
         instance = this;
 
         fab = root.findViewById(R.id.assignmentfab);
-
+        ToggleButton sortToggle = root.findViewById(R.id.sortToggle);
 
         recyclerView = root.findViewById(R.id.assignmentsRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -52,6 +61,17 @@ public class AssignmentFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new RecyclerViewAdapter(assignmentList, requireContext(), this);
         recyclerView.setAdapter(mAdapter);
+
+        sortToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Collections.sort(assignmentList, AssignmentModel.dateSort);
+                } else {
+                    Collections.sort(assignmentList, AssignmentModel.courseSort);
+                }
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
