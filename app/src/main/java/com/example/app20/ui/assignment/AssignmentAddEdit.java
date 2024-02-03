@@ -2,11 +2,6 @@ package com.example.app20.ui.assignment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -18,21 +13,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.app20.MainActivity;
 import com.example.app20.R;
-import com.example.app20.ui.classes.ClassModel;
+import com.example.app20.ui.classes.ClassesFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-public class AssignmentAddEdit extends BottomSheetDialogFragment {
+public class AssignmentAddEdit extends BottomSheetDialogFragment implements AdapterView.OnItemSelectedListener {
 
     public static final String TAG = "ActionBottomDialog";
     Button saveAssignmentButton;
@@ -40,12 +38,16 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
     List<AssignmentModel> assignmentList;
     AssignmentModel currAssignment = null;
     private boolean toUpdate = false;
-    private int month;
-    private int day;
+    private int newMonth;
+    private int newDay;
+    private String newName;
+    private String newCourse;
     int id;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayDate;
     private AssignmentModel newAssignment;
+
+    private Spinner courseSelector;
 
     public static AssignmentAddEdit newInstance(){
         return new AssignmentAddEdit();
@@ -74,8 +76,14 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
 
         saveAssignmentButton = requireView().findViewById(R.id.newAssignmentSaveButton);
         et_assignment = requireView().findViewById(R.id.newAssignmentText);
-        et_course = requireView().findViewById(R.id.newAssignmentCourseText);
         mDisplayDate = (TextView) requireView().findViewById(R.id.newAssignmentDateText);
+        courseSelector = requireView().findViewById(R.id.newAssignmentCourseButton);
+
+        courseSelector.setOnItemSelectedListener(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, ClassesFragment.getCourses());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courseSelector.setAdapter(adapter);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -91,7 +99,6 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
                 }
             }
             et_assignment.setText(currAssignment.getAssignment());
-            et_course.setText(currAssignment.getCourse());
         }
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -122,23 +129,23 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
+                newMonth = month + 1;
+                newDay = day;
                 String date = month + "/" + day;
                 mDisplayDate.setText(date);
-                newAssignment = new AssignmentModel(id, et_assignment.getText().toString(), et_course.getText().toString(), month,  day);
             }
         };
+
         saveAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (toUpdate) { //update
-//                    AssignmentModel update = new AssignmentModel(id, et_assignment.getText().toString(), et_course.getText().toString(), et_date.getText().toString());
+                    AssignmentModel newAssignment = new AssignmentModel(id, et_assignment.getText().toString(), newCourse, newMonth, newDay);
                     AssignmentFragment.setAssignmentAtIndex(id, newAssignment);
                     AssignmentFragment.setToUpdate(true);
                 } else { //add
                     int nextId = AssignmentFragment.getNextId();
-//                    AssignmentModel newAssignment = new AssignmentModel(nextId, et_assignment.getText().toString(), et_course.getText().toString(), et_date.getText().toString());
-                    newAssignment.setId(nextId);
+                    AssignmentModel newAssignment = new AssignmentModel(nextId, et_assignment.getText().toString(), newCourse, newMonth, newDay);
                     AssignmentFragment.addAssignment(newAssignment);
                     AssignmentFragment.setNextId(++nextId);
                     AssignmentFragment.setToUpdate(false);
@@ -146,6 +153,18 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
+
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (parent.getId() == R.id.newAssignmentCourseButton) {
+            Log.d("UPDATED THE COURSE", parent.getItemAtPosition(position).toString());
+            newCourse = parent.getItemAtPosition(position).toString();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
@@ -157,4 +176,5 @@ public class AssignmentAddEdit extends BottomSheetDialogFragment {
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
 }

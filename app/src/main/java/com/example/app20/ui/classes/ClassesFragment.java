@@ -118,4 +118,18 @@ public class ClassesFragment extends Fragment {
     public static ClassesFragment getInstance() {
         return instance;
     }
+    public static List<String> getCourses() {
+        List<String> courses = new ArrayList<>();
+        for (ClassModel c : classList) {
+            courses.add(c.getCourseNum());
+        }
+        return courses;
+    }
+//    public static String[] getCourses() {
+//        String[] names = new String[classList.size()];
+//        for (int i = 0; i < classList.size(); i++) {
+//            names[i] = classList.get(i).getCourseNum();
+//        }
+//        return names;
+//    }
 }

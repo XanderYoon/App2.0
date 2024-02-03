@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/inLineClassLayout"
     android:layout_width="match_parent"
-    android:layout_height="175dp"
+    android:layout_height="140dp"
     android:outlineProvider="bounds">
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:text="Time"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,8 +79,8 @@
 
     <ImageButton
         android:id="@+id/inlineClassDeleteButton"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:backgroundTint="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"

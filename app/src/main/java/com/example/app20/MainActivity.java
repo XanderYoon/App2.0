@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app20.databinding.ActivityMainBinding;
 
+import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -42,8 +44,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         if (navLocation != null) {
+            String newLocation = Objects.requireNonNull(navLocation.getString("redirectLoc"));
             NavController temp = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            temp.navigate(R.id.nav_assignment);
+            switch(newLocation) {
+                case "assignment":
+                    temp.navigate(R.id.nav_assignment);
+                    break;
+                case "exam":
+                    temp.navigate(R.id.nav_exam);
+                    break;
+                case "todo":
+                    temp.navigate(R.id.nav_todo);
+                    break;
+                default:
+                    temp.navigate(R.id.nav_classes);
+            }
         }
     }
 
