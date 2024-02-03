@@ -34,6 +34,7 @@ public class ClassesFragment extends Fragment {
     private static ClassesFragment instance;
     private static boolean toUpdate;
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -99,6 +100,11 @@ public class ClassesFragment extends Fragment {
         classList.set(id, updateClass);
         toUpdate = true;
         updateId = id;
+    }
+
+    public static void deleteClass(int position) {
+        classList.remove(position);
+        --nextId;
     }
 
     public static int getNextId() {

@@ -1,15 +1,23 @@
 package com.example.app20.ui.assignment;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,11 +26,15 @@ import android.widget.TextView;
 import com.example.app20.MainActivity;
 import com.example.app20.R;
 import com.example.app20.ui.classes.ClassModel;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
-public class AssignmentAddEdit extends AppCompatActivity {
+public class AssignmentAddEdit extends BottomSheetDialogFragment {
+
+    public static final String TAG = "ActionBottomDialog";
     Button saveAssignmentButton;
     EditText et_assignment, et_course, et_date;
     List<AssignmentModel> assignmentList;
@@ -35,21 +47,41 @@ public class AssignmentAddEdit extends AppCompatActivity {
     private TextView mDisplayDate;
     private AssignmentModel newAssignment;
 
+    public static AssignmentAddEdit newInstance(){
+        return new AssignmentAddEdit();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_assignment);
+        setStyle(STYLE_NORMAL, R.style.DialogStyle);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.new_assignment, container, false);
+        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        return view;
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         assignmentList = AssignmentFragment.getAssignmentList();
 
-        saveAssignmentButton = findViewById(R.id.newAssignmentSaveButton);
-        et_assignment = findViewById(R.id.newAssignmentText);
-        et_course = findViewById(R.id.newAssignmentCourseText);
+        saveAssignmentButton = requireView().findViewById(R.id.newAssignmentSaveButton);
+        et_assignment = requireView().findViewById(R.id.newAssignmentText);
+        et_course = requireView().findViewById(R.id.newAssignmentCourseText);
+        mDisplayDate = (TextView) requireView().findViewById(R.id.newAssignmentDateText);
 
-        mDisplayDate = (TextView) findViewById(R.id.newAssignmentDateText);
-
-        Intent intent = getIntent();
-        id = intent.getIntExtra("id", -1);
-
+        Bundle args = getArguments();
+        if (args != null) {
+            id = args.getInt("id", -1);
+        }
+        Log.d("THE ID PASS THROUGH BUNDLE", String.valueOf(id));
         if (id >= 0) {
             for (AssignmentModel c : assignmentList){
                 if (c.getId() == id) {
@@ -78,7 +110,7 @@ public class AssignmentAddEdit extends AppCompatActivity {
                 }
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AssignmentAddEdit.this,
+                        requireContext(),
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year,month,day);
@@ -111,11 +143,18 @@ public class AssignmentAddEdit extends AppCompatActivity {
                     AssignmentFragment.setNextId(++nextId);
                     AssignmentFragment.setToUpdate(false);
                 }
-                //go back to AssignmentFragment
-                Intent intent = new Intent(AssignmentAddEdit.this, MainActivity.class);
-                startActivity(intent);
+                dismiss();
             }
         });
 
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);Bundle bundle = new Bundle();
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
+        bundle.putString("redirectLoc", "assignment");
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

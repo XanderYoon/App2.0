@@ -1,8 +1,6 @@
 package com.example.app20.ui.assignment;
 
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.app20.R;
 import com.example.app20.databinding.FragmentAssignmentBinding;
@@ -53,20 +50,24 @@ public class AssignmentFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RecyclerViewAdapter(assignmentList, requireContext());
+        mAdapter = new RecyclerViewAdapter(assignmentList, requireContext(), this);
         recyclerView.setAdapter(mAdapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), AssignmentAddEdit.class);
-                startActivity(intent);
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", -1);
+                AssignmentAddEdit fragment = new AssignmentAddEdit();
+                fragment.setArguments(bundle);
+                fragment.show(requireActivity().getSupportFragmentManager(), AssignmentAddEdit.TAG);
             }
         });
         if (toUpdate) {
+            Log.d("TO UPDATE", "ITS BEING UPDATED!!!!");
             mAdapter.notifyItemChanged(updateId);
         } else {
+            Log.d("NOT UPDATE", "ITS BEING ADDDED!!!!");
             mAdapter.notifyItemInserted(assignmentList.size() - 1);
         }
 

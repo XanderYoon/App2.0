@@ -42,8 +42,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.App20.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.App20.NoActionBar"/>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<com.example.app20.ui.assignment.RecyclerViewAdapter.MyViewHolder> {
     List<AssignmentModel> assignmentList;
     Context context;
+    private AssignmentFragment activity;
 
-    public RecyclerViewAdapter(List<AssignmentModel> assignmentList, Context context) {
+    public RecyclerViewAdapter(List<AssignmentModel> assignmentList, Context context, AssignmentFragment activity) {
         this.assignmentList = assignmentList;
         this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -43,11 +46,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<com.example.app20.
         holder.tv_assignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //edit item
-                Intent intent = new Intent(context, AssignmentAddEdit.class);
-                intent.putExtra("id", assignmentList.get(position).getId());
-                context.startActivity(intent);
-            }
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", position);
+                AssignmentAddEdit fragment = new AssignmentAddEdit();
+                fragment.setArguments(bundle);
+                fragment.show(activity.requireActivity().getSupportFragmentManager(), AssignmentAddEdit.TAG);
+                notifyItemChanged(position);            }
         });
         holder.delButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,14 +94,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<com.example.app20.
         TextView tv_course;
         TextView tv_date;
         ImageButton delButton;
-        ConstraintLayout parentLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_assignment = itemView.findViewById(R.id.assignmentName);
             tv_course = itemView.findViewById(R.id.assignmentCourse);
             tv_date = itemView.findViewById(R.id.assignmentDate);
-//            parentLayout = itemView.findViewById(R.id.inLineAssignmentLayout);
             delButton = itemView.findViewById(R.id.inlineAssignmentDeleteButton);
         }
     }
